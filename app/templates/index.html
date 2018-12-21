@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block appcontent %}
+  <h1>Feature Requests </h1>
+  {% if not features %}
+    No features available
+  {% endif %}
+  <ul>
+    {% for feature in features %}
+    <li><a href="{{url_for('get_feature', feat=feature.id)}}">{{feature.title}}</a></li>
+    {% endfor %}
+  </ul>
+  <h1>Clients</h1>
+  {% if not clients %}
+    No clients available
+  {% endif %}
+  <ul>
+    {% for client in clients %}
+    <li><a href="{{url_for('get_client', id=client.id)}}">{{client.name}}</a></li>
+    {% endfor%}
+  </ul>
+    
+    
+  {% endblock %}

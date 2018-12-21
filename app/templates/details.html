@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block appcontent %}
+  {% if feature %}
+  <h1>Feature</h1>
+    <p>Title: {{feature.title}}</p>
+    <p>Description: {{feature.description}}</p>
+    <p>Client: {{feature.client}}</p>
+    <p>Client Priority: {{feature.client_priority}}</p>
+    <p>Target Date: {{feature.target_date.date()}}</p>
+    <p>Product Areas: {{feature.product_areas}}</p>
+  {% endif %}
+
+  {% if client %}
+  <h1>Client</h1>
+    <p>Name: {{client.name}}</p>
+    <p>Location: {{client.location}}</p>
+  {% endif %}
+{% endblock %}
