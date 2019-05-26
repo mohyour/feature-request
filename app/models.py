@@ -18,7 +18,7 @@ class Feature(db.Model):
 class Client(db.Model):
     __tablename__ = 'client'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60))
+    name = db.Column(db.String(60), unique=True, nullable=False)
     location = db.Column(db.String(120))
 
     def __repr__(self):

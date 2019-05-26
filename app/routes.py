@@ -4,6 +4,14 @@ from app.forms import FeatureForm, ClientForm
 from .models import Feature, Client
 
 
+def increase_priority_level(client):
+    client_features = Feature.query.filter_by(client=client).\
+                      filter_by(client_priority=1)
+    if client_features:
+        Feature.query.filter_by(client=client).update(
+            {'client_priority': Feature.client_priority + 1})
+
+
 @app.route('/', methods=['GET'])
 def index():
     clients = Client.query.all()
@@ -21,11 +29,10 @@ def feature():
     title = form.title.data
     description = form.description.data
     client = dict(clients).get(form.client.data)
-    client_priority = Client.query.filter_by(name=title)
     client_priority = form.client_priority.data
+    if client_priority == 1:
+        increase_priority_level(client)
     target_date = form.target_date.data
-    form.client_priority.choices = [(0, "Select a priority"), (1, '1'),
-                                    (2, '2'), (3, '3'), (4, '4'), (5, '5')]
     product_areas = form.product_areas.data
     if form.validate_on_submit():
         feature = Feature(title=title, description=description, client=client,
