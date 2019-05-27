@@ -3,17 +3,17 @@
 {% block appcontent %}
   {% if feature %}
   <h1>Feature</h1>
-    <p>Title: {{feature.title}}</p>
-    <p>Description: {{feature.description}}</p>
-    <p>Client: {{feature.client}}</p>
-    <p>Client Priority: {{feature.client_priority}}</p>
-    <p>Target Date: {{feature.target_date.date()}}</p>
-    <p>Product Areas: {{feature.product_areas}}</p>
+    <p><b>Title:</b> {{feature.title}}</p>
+    <p><b>Description:</b> {{feature.description}}</p>
+    <p><b>Client:</b> {{feature.client}}</p>
+    <p><b>Client Priority:</b> {{feature.client_priority}}</p>
+    <p><b>Target Date:</b> {{feature.target_date.date()}}</p>
+    <p><b>Product Areas:</b> {{feature.product_areas}}</p>
   {% endif %}
 
   {% if client %}
   <h1>Client</h1>
-    <p>Name: {{client.name}}</p>
-    <p>Location: {{client.location}}</p>
+    <p><b>Name:</b> {{client.name}}</p>
+    <p><b>Location:</b> {{client.location}}</p>
   {% endif %}
 {% endblock %}
