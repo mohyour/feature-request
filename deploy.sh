@@ -14,17 +14,17 @@ function initialize_worker() {
     # Install pip3
     echo ======= Installing pip3 =======
     sudo apt-get install -y python3-pip
+    sudo apt-get -y install python3 python3-venv python3-dev
 }
 
 function setup_python_venv() {
     printf "***************************************************\n\t\tSetting up Venv \n***************************************************\n"
     # Install virtualenv
     echo ======= Installing virtualenv =======
-    pip3 install virtualenv
 
     # Create virtual environment and activate it
     echo ======== Creating and activating virtual env =======
-    virtualenv venv
+    python3 -m venv venv
     source ./venv/bin/activate
 }
 
@@ -37,17 +37,31 @@ function clone_app_repository() {
         git clone https://github.com/mohyour/feature-request.git ~/feature-request
         cd ~/feature-request/
     else
-        git clone https://github.com/indungu/feature-request.git ~/feature-request
+        git clone https://github.com/mohyour/feature-request.git ~/feature-request
         cd ~/feature-request/
     fi
 }
 
 function setup_app() {
     printf "***************************************************\n    Installing App dependencies and Env Variables \n***************************************************\n"
+    setup_env
     # Install required packages
     echo ======= Installing required packages ========
     pip install -r requirements.txt
 
+}
+
+# Create and Export required environment variable
+function setup_env() {
+    echo ======= Exporting the necessary environment variables ========
+    sudo cat > ~/feature-request/\.env << EOF
+    export FLASK_APP=<entry app>
+    export SECRET_KEY=<secret key>
+    export DATABASE_URI=<database url>
+
+EOF
+    echo ======= Exporting the necessary environment variables ========
+    source ~/.env
 }
 
 # Install and configure nginx
@@ -95,9 +109,11 @@ function create_launch_script () {
     sudo cat > /home/ubuntu/launch.sh <<EOF
     #!/bin/bash
     cd ~/feature-request
-    source ~/.env
-    source ~/venv/bin/activate
-    gunicorn app:APP -D
+    source .env
+    source venv/bin/activate
+    flask db migrate
+    flask db upgrade
+    gunicorn main:APP -D
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
@@ -125,7 +141,7 @@ EOF'
     sudo service feature-request status
 }
 
-Serve the web app through gunicorn
+# Serve the web app through gunicorn
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
     sudo bash /home/ubuntu/launch.sh
@@ -136,8 +152,8 @@ function launch_app() {
 ######################################################################
 
 initialize_worker
-setup_python_venv
 clone_app_repository
+setup_python_venv
 setup_app
 setup_nginx
 create_launch_script
