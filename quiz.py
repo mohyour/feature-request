@@ -18,9 +18,10 @@ key = 'TluxwB3fV_GWuLkR1_BzGs1Zk90TYAuhNMZP_0q4WyM='
 
 
 # Oh no! The code is going over the edge! What are you going to do?
-message =b'gAAAAABc6v8QRsDcKfRDbpBYP1XmZ0_9sO-QkTONDYIyqoN6P9OOAFuBuA9jSIxcG\
-    CQNI-VBwqiOlMhO09IwHU7zbznZqaDq4YPO1As7KJL20JxQzwbm2aDqtR-jneit7CPNd9EZFHv\
-    7I4uE2GbeTBvy7g0vMt9lytJ466mIh3kHCZVrHdpZ3bp6PxVeSFurQ0NZ6oublJD2'
+message = b'gAAAAABdA6Xw9rCM3j4P1mFARwXzccJhD6JkAsUZ6M7NtBhBQMml6DRZNUZ05CzSax\
+          6yuuk8w88qPG1HtMFI3RgMo5aXTx4J-TrVnFLdZ7f7T--aJ-gZCpU2cRCeXcPaRi6QNK\
+          NqwwF5hFfLfOb7R_YfzRYROZ2s5hFgtSNEb2Ev_41itG7bxFT7S7WFvvNpCQKuOME0Sm\
+          P2'
 
 
 def main():
